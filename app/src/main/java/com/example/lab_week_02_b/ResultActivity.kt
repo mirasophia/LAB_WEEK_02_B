@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 
 class ResultActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class ResultActivity : AppCompatActivity() {
 
         val layout = findViewById<ConstraintLayout>(R.id.resultLayout)
         val txtResult = findViewById<TextView>(R.id.txtResult)
+        val btnBack = findViewById<Button>(R.id.btnBack)
 
         val colorCode = intent.getStringExtra("COLOR_CODE")
 
@@ -21,9 +23,13 @@ class ResultActivity : AppCompatActivity() {
             try {
                 layout.setBackgroundColor(Color.parseColor(colorCode))
                 txtResult.text = "Background changed to $colorCode"
-            } catch (e: IllegalArgumentException) {
+            } catch (_: IllegalArgumentException) {
                 Toast.makeText(this, "Invalid color code: $colorCode", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        btnBack.setOnClickListener {
+            finish()
         }
     }
 }
