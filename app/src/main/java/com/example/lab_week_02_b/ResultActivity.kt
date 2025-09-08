@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 class ResultActivity : AppCompatActivity() {
@@ -17,8 +18,12 @@ class ResultActivity : AppCompatActivity() {
         val colorCode = intent.getStringExtra("COLOR_CODE")
 
         if (colorCode != null) {
-            layout.setBackgroundColor(Color.parseColor(colorCode))
-            txtResult.text = "Background changed to $colorCode"
+            try {
+                layout.setBackgroundColor(Color.parseColor(colorCode))
+                txtResult.text = "Background changed to $colorCode"
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(this, "Invalid color code: $colorCode", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
